@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Rental Motor Lowokwaru | Tambah Motor</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+    <header>
+        <h1>Rental Motor Lowokwaru</h1>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Beranda</a></li>
+                <li><a href="list.html">Daftar Motor</a></li>
+                <li><a href="tambah.html">Tambah Motor</a></li>
+                <li><a href="../anggota/list.html">Daftar Pelanggan</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Tambah Motor</h2>
+            <form>
+                <p>
+                    <label for="plat_nomor">Plat Nomor</label><br>
+                    <input type="text" id="plat_nomor" name="plat_nomor" required>
+                </p>
+                <p>
+                    <label for="merek">Merek dan Model</label><br>
+                    <input type="text" id="merek" name="merek" required>
+                </p>
+                <p>
+                    <label for="tahun">Tahun</label><br>
+                    <input type="number" id="tahun" name="tahun" min="1900" max="2026" required>
+                </p>
+                <p>
+                    <label for="warna">Warna</label><br>
+                    <input type="text" id="warna" name="warna" required>
+                </p>
+                <p>
+                    <label for="harga">Harga Sewa/Hari</label><br>
+                    <input type="number" id="harga" name="harga" min="0" required>
+                </p>
+                <p>
+                    <label for="jenis">Jenis Motor</label><br>
+                    <select id="jenis" name="jenis">
+                        <option>Matic</option>
+                        <option>Bebek</option>
+                        <option>Sport</option>
+                        <option>Trail</option>
+                    </select>
+                </p>
+                <p>
+                    <button type="submit">Simpan</button>
+                </p>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Rental Motor Malang Lowokwaru</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,500 @@
+/* =========================================================
+    Rental Motor Lowokwaru — stylesheet
+   Tema: "kartu katalog perpustakaan" — laci katalog lama,
+   kertas krem, garis emas tipis, kartu bergaris seperti
+   kartu indeks perpustakaan asli.
+
+   Catatan: semua selector/class SAMA PERSIS dengan versi
+   sebelumnya, jadi index.html tidak perlu diubah sama sekali.
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+    --forest-950: #10241a;
+    --forest-900: #163a26;
+    --forest-800: #1f4d32;
+    --forest-700: #2a6339;
+    --forest-600: #3f8c56;
+    --gold-700: #8a5f22;
+    --gold-500: #b8863f;
+    --gold-300: #d3ac6c;
+    --gold-100: #f1e4c8;
+    --cream-50: #faf6ee;
+    --cream-100: #f3ecdc;
+    --paper: #fffdf8;
+    --ink-900: #241f1c;
+    --ink-600: #5c534b;
+    --ink-400: #8a8073;
+    --line: #e3d6bd;
+    --card-shadow: 0 14px 30px -18px rgba(16, 36, 26, 0.45);
+    --card-shadow-soft: 0 6px 16px -10px rgba(16, 36, 26, 0.3);
+}
+
+/* ===== Reset & Base ===== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+    color: var(--ink-900);
+    background-color: var(--cream-50);
+    background-image:
+        repeating-linear-gradient(180deg, rgba(184, 134, 63, 0.035) 0px, rgba(184, 134, 63, 0.035) 1px, transparent 1px, transparent 34px);
+    line-height: 1.6;
+}
+
+h1, h2, h3 {
+    font-family: "Fraunces", "Source Serif 4", Georgia, "Times New Roman", serif;
+    color: var(--forest-950);
+}
+
+a {
+    color: var(--forest-700);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--gold-500);
+}
+
+:focus-visible {
+    outline: 2px solid var(--gold-500);
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* ===== Header & Navbar ===== */
+header {
+    background:
+        linear-gradient(155deg, var(--forest-950) 0%, var(--forest-800) 60%, var(--forest-600) 100%);
+    color: #fff;
+    padding: 0.9rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    box-shadow: 0 4px 0 var(--gold-500), 0 10px 22px -8px rgba(16, 36, 26, 0.55);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    color: #fff;
+    text-decoration: none;
+}
+
+.brand:hover {
+    text-decoration: none;
+}
+
+.brand svg {
+    flex-shrink: 0;
+    color: var(--gold-300);
+}
+
+.brand h1 {
+    font-family: "Fraunces", "Source Serif 4", Georgia, serif;
+    font-size: 1.35rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    color: #fff;
+}
+
+/* Checkbox hack: input tersembunyi, label yang tampil sebagai tombol */
+.nav-toggle {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.nav-toggle-label {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.nav-toggle-label:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Hamburger dibangun dari tiga garis, agar bisa animasi jadi X */
+.nav-toggle-label span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background-color: #fff;
+    border-radius: 2px;
+    transition: transform 0.25s ease, opacity 0.2s ease;
+}
+
+.nav-toggle:checked ~ .nav-toggle-label span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.nav-toggle:checked ~ .nav-toggle-label span:nth-child(2) {
+    opacity: 0;
+}
+
+.nav-toggle:checked ~ .nav-toggle-label span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+}
+
+header nav a {
+    color: rgba(255, 255, 255, 0.82);
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 0.35rem 0.1rem;
+    border-bottom: 2px solid transparent;
+    transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+header nav a:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+header nav a.active {
+    color: #fff;
+    border-bottom-color: var(--gold-500);
+}
+
+/* ===== Nav mobile (default: tertutup) ===== */
+header nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--forest-950);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.28s ease;
+    z-index: 20;
+}
+
+header nav ul {
+    flex-direction: column;
+    gap: 0;
+    padding: 0.25rem 0;
+}
+
+header nav a {
+    display: block;
+    padding: 0.85rem 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-left: 3px solid transparent;
+}
+
+header nav a.active {
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+    border-left-color: var(--gold-500);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.nav-toggle:checked ~ nav {
+    max-height: 320px;
+}
+
+.nav-toggle-label {
+    display: flex;
+}
+
+/* ===== Nav desktop ===== */
+@media (min-width: 800px) {
+    header {
+        padding: 1.05rem 2rem;
+    }
+
+    .nav-toggle-label {
+        display: none;
+    }
+
+    header nav {
+        position: static;
+        max-height: none;
+        overflow: visible;
+        background: transparent;
+    }
+
+    header nav ul {
+        flex-direction: row;
+        gap: 1.75rem;
+        padding: 0;
+    }
+
+    header nav a {
+        padding: 0.35rem 0.1rem;
+        border-left: none;
+        border-bottom: 2px solid transparent;
+    }
+
+    header nav a.active {
+        background: transparent;
+        border-bottom-color: var(--gold-500);
+    }
+}
+
+/* ===== Layout Utama ===== */
+main {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+}
+
+section {
+    position: relative;
+    background-color: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 1.85rem 1.85rem 1.85rem 2.1rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--card-shadow-soft);
+}
+
+/* Garis indeks tipis di kiri, seperti pembatas kolom kartu katalog */
+section::before {
+    content: "";
+    position: absolute;
+    left: 0.85rem;
+    top: 0.9rem;
+    bottom: 0.9rem;
+    width: 2px;
+    background: linear-gradient(180deg, var(--gold-500), transparent 85%);
+    border-radius: 2px;
+}
+
+section h2 {
+    margin-bottom: 0.35rem;
+    color: var(--forest-950);
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+/* ===== Hero / Bagian Selamat Datang ===== */
+main section:first-of-type {
+    background: linear-gradient(155deg, var(--cream-100) 0%, var(--paper) 60%);
+    border-left: 4px solid var(--gold-500);
+    box-shadow: var(--card-shadow);
+}
+
+main section:first-of-type h2 {
+    margin-bottom: 0.5rem;
+    font-size: 1.7rem;
+}
+
+main section:first-of-type p {
+    color: var(--ink-600);
+    max-width: 60ch;
+}
+
+/* ===== Kartu Statistik (Ringkasan) ===== */
+main section:nth-of-type(2) {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 1rem;
+}
+
+main section:nth-of-type(2) h2 {
+    grid-column: 1 / -1;
+    margin-bottom: 0.5rem;
+}
+
+main section:nth-of-type(2) article {
+    position: relative;
+    background-color: var(--cream-100);
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--gold-500);
+    border-radius: 8px;
+    padding: 1.3rem 1.4rem;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+main section:nth-of-type(2) article:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--card-shadow-soft);
+}
+
+main section:nth-of-type(2) article h3 {
+    font-family: "Inter", sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--ink-600);
+    margin-bottom: 0.4rem;
+}
+
+main section:nth-of-type(2) article p {
+    font-family: "Fraunces", "Source Serif 4", Georgia, serif;
+    font-size: 2.15rem;
+    font-weight: 700;
+    color: var(--forest-950);
+    line-height: 1;
+}
+
+/* ===== Tabel ===== */
+.table-responsive {
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    box-shadow: var(--card-shadow-soft);
+}
+
+table {
+    width: 100%;
+    min-width: 560px;
+    border-collapse: collapse;
+}
+
+th, td {
+    text-align: left;
+    padding: 0.8rem 1.05rem;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.95rem;
+}
+
+thead {
+    background: linear-gradient(155deg, var(--forest-950), var(--forest-800));
+    color: #fff;
+    box-shadow: inset 0 -2px 0 var(--gold-500);
+}
+
+thead th {
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.02em;
+}
+
+tbody tr:nth-child(even) {
+    background-color: var(--cream-50);
+}
+
+tbody tr:hover {
+    background-color: var(--gold-100);
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* ===== Tombol Edit & Hapus ===== */
+td button {
+    padding: 0.42rem 0.95rem;
+    margin-right: 0.4rem;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 0.82rem;
+    font-weight: 600;
+    transition: filter 0.15s ease, transform 0.15s ease;
+}
+
+td button:hover {
+    filter: brightness(0.95);
+    transform: translateY(-1px);
+}
+
+/* Tombol Edit */
+td button:first-of-type {
+    background-color: var(--gold-500);
+    color: #fff;
+}
+
+/* Tombol Hapus */
+td button:last-of-type {
+    background-color: #a8433e;
+    color: #fff;
+}
+
+/* ===== Formulir ===== */
+form p {
+    margin-bottom: 1.15rem;
+}
+
+form label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-weight: 600;
+    font-size: 0.88rem;
+    color: var(--ink-600);
+}
+
+/* Gaya "kartu indeks bergaris" untuk input, alih-alih kotak polos */
+form input,
+form select {
+    width: 100%;
+    max-width: 400px;
+    padding: 0.65rem 0.75rem;
+    border: none;
+    border-bottom: 1.5px solid var(--line);
+    border-radius: 4px 4px 0 0;
+    font-size: 1rem;
+    font-family: inherit;
+    color: var(--ink-900);
+    background-color: var(--cream-100);
+    background-image: linear-gradient(180deg, transparent calc(100% - 1px), var(--line) 1px);
+    transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+form input:focus,
+form select:focus {
+    outline: none;
+    border-bottom-color: var(--gold-500);
+    background-color: var(--paper);
+    box-shadow: 0 1px 0 var(--gold-500);
+}
+
+form button[type="submit"] {
+    background: linear-gradient(155deg, var(--forest-700), var(--forest-900));
+    color: #fff;
+    border: none;
+    padding: 0.75rem 1.85rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: var(--card-shadow-soft);
+    transition: filter 0.15s ease, transform 0.15s ease;
+}
+
+form button[type="submit"]:hover {
+    filter: brightness(1.08);
+    transform: translateY(-1px);
+}
+
+/* ===== Footer ===== */
+footer {
+    text-align: center;
+    padding: 1.6rem;
+    color: var(--ink-600);
+    font-size: 0.85rem;
+    border-top: 1px solid var(--line);
+    margin-top: 1rem;
+}

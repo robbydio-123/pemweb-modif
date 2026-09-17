@@ -1,0 +1,122 @@
+[
+    {
+        "plat_nomor": "N 1234 AB",
+        "merek": "Honda",
+        "model": "Vario 160",
+        "tahun": 2024,
+        "warna": "Hitam",
+        "jenis": "Matic",
+        "kapasitas_cc": 160,
+        "harga_sewa_per_hari": 85000,
+        "status": "Tersedia",
+        "foto": "vario-160.jpg"
+    },
+    {
+        "plat_nomor": "N 2345 CD",
+        "merek": "Yamaha",
+        "model": "NMAX",
+        "tahun": 2023,
+        "warna": "Biru",
+        "jenis": "Matic",
+        "kapasitas_cc": 155,
+        "harga_sewa_per_hari": 120000,
+        "status": "Tersedia",
+        "foto": "nmax.jpg"
+    },
+    {
+        "plat_nomor": "N 3456 EF",
+        "merek": "Honda",
+        "model": "Beat Street",
+        "tahun": 2022,
+        "warna": "Merah",
+        "jenis": "Matic",
+        "kapasitas_cc": 110,
+        "harga_sewa_per_hari": 70000,
+        "status": "Disewa",
+        "foto": "beat-street.jpg"
+    },
+    {
+        "plat_nomor": "N 4567 GH",
+        "merek": "Yamaha",
+        "model": "Aerox",
+        "tahun": 2024,
+        "warna": "Abu-abu",
+        "jenis": "Matic",
+        "kapasitas_cc": 155,
+        "harga_sewa_per_hari": 110000,
+        "status": "Tersedia",
+        "foto": "aerox.jpg"
+    },
+    {
+        "plat_nomor": "N 5678 IJ",
+        "merek": "Honda",
+        "model": "Scoopy",
+        "tahun": 2023,
+        "warna": "Cream",
+        "jenis": "Matic",
+        "kapasitas_cc": 110,
+        "harga_sewa_per_hari": 80000,
+        "status": "Tersedia",
+        "foto": "scoopy.jpg"
+    },
+    {
+        "plat_nomor": "N 6789 KL",
+        "merek": "Honda",
+        "model": "PCX",
+        "tahun": 2022,
+        "warna": "Putih",
+        "jenis": "Matic",
+        "kapasitas_cc": 160,
+        "harga_sewa_per_hari": 125000,
+        "status": "Tersedia",
+        "foto": "pcx.jpg"
+    },
+    {
+        "plat_nomor": "N 7890 MN",
+        "merek": "Yamaha",
+        "model": "Fazzio",
+        "tahun": 2024,
+        "warna": "Hijau",
+        "jenis": "Matic",
+        "kapasitas_cc": 125,
+        "harga_sewa_per_hari": 90000,
+        "status": "Tersedia",
+        "foto": "fazzio.jpg"
+    },
+    {
+        "plat_nomor": "N 8901 OP",
+        "merek": "Kawasaki",
+        "model": "KLX 150",
+        "tahun": 2021,
+        "warna": "Hijau",
+        "jenis": "Trail",
+        "kapasitas_cc": 150,
+        "harga_sewa_per_hari": 150000,
+        "status": "Tersedia",
+        "foto": "klx.jpg"
+    },
+    {
+        "plat_nomor": "N 9012 QR",
+        "merek": "Honda",
+        "model": "CRF 150L",
+        "tahun": 2022,
+        "warna": "Merah",
+        "jenis": "Trail",
+        "kapasitas_cc": 150,
+        "harga_sewa_per_hari": 160000,
+        "status": "Disewa",
+        "foto": "crf.jpg"
+    },
+    {
+        "plat_nomor": "N 0123 ST",
+        "merek": "Vespa",
+        "model": "Sprint",
+        "tahun": 2023,
+        "warna": "Kuning",
+        "jenis": "Matic",
+        "kapasitas_cc": 150,
+        "harga_sewa_per_hari": 180000,
+        "status": "Tersedia",
+        "foto": "vespa-sprint.jpg"
+    }
+]

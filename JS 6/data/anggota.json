@@ -1,0 +1,30 @@
+[
+    {
+        "no_pelanggan": "P001",
+        "nama": "Siti Aminah",
+        "no_ktp": "3573012345670001",
+        "alamat": "Lowokwaru, Malang",
+        "no_hp": "081234567890"
+    },
+    {
+        "no_pelanggan": "P002",
+        "nama": "Budi Santoso",
+        "no_ktp": "3573012345670002",
+        "alamat": "Tlogomas, Malang",
+        "no_hp": "081345678901"
+    },
+    {
+        "no_pelanggan": "P003",
+        "nama": "Citra Lestari",
+        "no_ktp": "3573012345670003",
+        "alamat": "Dinoyo, Malang",
+        "no_hp": "081456789012"
+    },
+    {
+        "no_pelanggan": "P004",
+        "nama": "Dimas Pratama",
+        "no_ktp": "3573012345670004",
+        "alamat": "Merjosari, Malang",
+        "no_hp": "081567890123"
+    }
+]

@@ -1,0 +1,111 @@
+# Wireframe & User Flow — Rental Motor Lowokwaru
+
+Nama: Robby Dio R
+Nim: 254107060161
+Kelas: 2B
+Jurusan: Teknologi Informasi
+Prodi: Sistem Informasi Bisnis
+
+
+Sub-CPMK: Merancang UI/UX aplikasi (proyek).
+
+Halaman yang sudah ada (Beranda, Daftar/Tambah Motor, Daftar/Tambah Pelanggan) menjadi dasar fitur dashboard dan penyewaan motor.
+
+## 1. Aktor
+- **Pelanggan**: melihat armada motor dan mengajukan penyewaan.
+- **Petugas**: login untuk mengakses seluruh fitur CRUD dan transaksi peminjaman.
+
+## 2. User Flow — Peminjaman Buku
+
+```
+[Petugas Login] -> [Dashboard] -> [Pilih menu "Peminjaman Baru"]
+        -> [Pilih Anggota] -> [Pilih Buku (stok > 0)]
+        -> [Simpan] -> [Stok buku berkurang 1] -> [Kembali ke Dashboard]
+```
+
+## 3. User Flow — Pengembalian Buku
+
+```
+[Dashboard] -> [Menu "Pengembalian"] -> [Cari transaksi aktif (anggota/buku)]
+        -> [Tandai "Dikembalikan"] -> [Stok buku bertambah 1]
+        -> [Kembali ke Dashboard]
+```
+
+## 4. Wireframe: Halaman Login
+
+```
++--------------------------------------+
+|        Rental Motor Lowokwaru        |
+|--------------------------------------|
+|                                      |
+|        [ Login Petugas ]            |
+|                                      |
+|   Username : [______________]       |
+|   Password : [______________]       |
+|                                      |
+|          [   Masuk   ]              |
+|                                      |
+|   Belum punya akun? Daftar di sini  |
++--------------------------------------+
+```
+
+## 5. Wireframe: Dashboard Petugas
+
+```
++-----------------------------------------------------+
+| Rental Motor     Beranda | Motor | Pelanggan | Penyewaan | Logout |
+|-------------------------------------------------------|
+|  [Total Buku]   [Total Anggota]   [Sedang Dipinjam]    |
+|                                                         |
+|  Aksi Cepat:                                           |
+|  [ + Peminjaman Baru ]   [ + Pengembalian ]            |
+|                                                         |
+|  Transaksi Terbaru                                     |
+|  --------------------------------------------------    |
+|  Anggota | Buku | Tgl Pinjam | Status                  |
++-----------------------------------------------------+
+```
+
+## 6. Wireframe: Form Peminjaman
+
+```
++--------------------------------------+
+|  Form Peminjaman Buku                |
+|--------------------------------------|
+|  Anggota : [ dropdown pilih anggota ]|
+|  Buku    : [ dropdown, hanya stok>0 ]|
+|  Tanggal Pinjam : [ auto: hari ini ] |
+|                                      |
+|          [  Simpan Peminjaman  ]    |
++--------------------------------------+
+```
+
+## 7. Wireframe: Form Pengembalian
+
+```
++--------------------------------------+
+|  Pengembalian Buku                   |
+|--------------------------------------|
+|  Cari transaksi aktif:               |
+|  [ nama anggota / judul buku ______ ]|
+|                                      |
+|  Anggota | Buku | Tgl Pinjam | [Kembalikan] |
++--------------------------------------+
+```
+
+## 8. Wireframe: Riwayat Peminjaman per Anggota
+
+```
++--------------------------------------+
+|  Riwayat Peminjaman — Siti Aminah    |
+|--------------------------------------|
+|  Buku            | Pinjam   | Kembali | Status      |
+|  Laskar Pelangi   | 01/07    | 10/07   | Selesai     |
+|  Bumi Manusia      | 15/07    | -       | Dipinjam    |
++--------------------------------------+
+```
+
+## 9. Konsistensi dengan Desain yang Sudah Berjalan
+- Warna aksen, tipografi navbar, dan gaya tabel/kartu mengikuti `assets/css/style.css` yang sudah dibangun sejak Jobsheet 2-3.
+- Navbar akan ditambah menu **Peminjaman** dan indikator status login (nama petugas / tombol Logout) mulai implementasi di Jobsheet 10.
+- Edge case yang perlu ditangani saat implementa
