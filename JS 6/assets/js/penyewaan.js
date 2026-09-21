@@ -45,6 +45,12 @@ async function muatPenyewaan() {
 document.addEventListener("DOMContentLoaded", function () {
     muatPenyewaan();
 
+    const parameter = new URLSearchParams(window.location.search);
+    const platNomor = document.querySelector("#plat_nomor");
+    const hargaMotor = document.querySelector("#harga_sewa_per_hari");
+    if (platNomor && parameter.has("plat_nomor")) platNomor.value = parameter.get("plat_nomor");
+    if (hargaMotor && parameter.has("harga")) hargaMotor.value = parameter.get("harga");
+
     const form = document.querySelector("#form-penyewaan");
     const mulai = document.querySelector("#tanggal_sewa");
     const selesai = document.querySelector("#tanggal_kembali");

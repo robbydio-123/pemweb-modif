@@ -9,18 +9,20 @@ function tampilkanBuku(tbody, dataBuku) {
 
     dataBuku.forEach(function (buku) {
         const row = document.createElement("tr");
+        const motor = `${buku.merek} ${buku.model}`;
+        const linkPesan = `../penyewaan/tambah.html?plat_nomor=${encodeURIComponent(buku.plat_nomor)}&motor=${encodeURIComponent(motor)}&harga=${encodeURIComponent(buku.harga_sewa_per_hari)}`;
+        const aksi = buku.status === "Tersedia"
+            ? `<a class="btn-pesan" href="${linkPesan}"><i class="bi bi-calendar-check"></i> Pesan</a>`
+            : `<span class="aksi-nonaktif">Tidak tersedia</span>`;
 
         row.innerHTML = `
             <td>${buku.plat_nomor}</td>
-            <td>${buku.merek} ${buku.model}</td>
+            <td>${motor}</td>
             <td>${buku.tahun}</td>
             <td>${buku.jenis}</td>
             <td>Rp${Number(buku.harga_sewa_per_hari).toLocaleString("id-ID")}</td>
             <td><span class="status-${buku.status.toLowerCase()}">${buku.status}</span></td>
-            <td>
-                <button type="button">Edit</button>
-                <button type="button" class="btn-hapus">Hapus</button>
-            </td>
+            <td>${aksi}</td>
         `;
 
         tbody.appendChild(row);
