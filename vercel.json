@@ -1,9 +1,19 @@
 {
-    "redirects": [
-        {
-            "source": "/",
-            "destination": "/JS%206/index.html",
-            "permanent": false
-        }
-    ]
+  "functions": {
+    "api/index.php": {
+      "runtime": "vercel-php@0.9.0",
+      "maxDuration": 60
+    }
+  },
+  "rewrites": [
+    { "source": "/assets/:path*", "destination": "/JS%209/assets/:path*" },
+    { "source": "/index.php", "destination": "/api/index.php?route=index.php" },
+    {
+      "source": "/:section(anggota|buku|penyewaan)/:file*",
+      "destination": "/api/index.php?route=:section/:file"
+    }
+  ],
+  "redirects": [
+    { "source": "/", "destination": "/index.php", "permanent": false }
+  ]
 }

@@ -1,0 +1,2 @@
+<?php
+session_start(); require __DIR__ . '/../includes/auth.php'; require_admin(); $p=['nama'=>trim($_POST['nama']??''),'no_pelanggan'=>trim($_POST['no_pelanggan']??''),'alamat'=>trim($_POST['alamat']??''),'no_hp'=>trim($_POST['no_hp']??'')]; if($p['nama']===''||$p['no_pelanggan']===''||$p['no_hp']==='') die('Data pelanggan tidak valid.'); $_SESSION['pelanggan'][]=$p; header('Location: list.php'); exit;
