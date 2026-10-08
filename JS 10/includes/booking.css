@@ -1,0 +1,1 @@
+.booking-note { padding: .8rem 1rem; border-left: 3px solid var(--gold-500); background: var(--cream-100); } textarea { width: 100%; max-width: 400px; padding: .65rem; border: 1px solid var(--line); background: var(--cream-100); font: inherit; }

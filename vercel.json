@@ -6,10 +6,10 @@
     }
   },
   "rewrites": [
-    { "source": "/assets/:path*", "destination": "/JS%209/assets/:path*" },
+    { "source": "/assets/:path*", "destination": "/JS%2010/assets/:path*" },
     { "source": "/index.php", "destination": "/api/index.php?route=index.php" },
     {
-      "source": "/:section(anggota|buku|penyewaan)/:file*",
+      "source": "/:section(auth|anggota|buku|penyewaan)/:file*",
       "destination": "/api/index.php?route=:section/:file"
     }
   ],

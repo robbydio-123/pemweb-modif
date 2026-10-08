@@ -1,0 +1,67 @@
+<?php
+require __DIR__ . "/../includes/auth.php";
+require_login();
+require __DIR__ . "/../includes/koneksi.php";
+$motorId = filter_input(INPUT_POST, "motor_id", FILTER_VALIDATE_INT);
+$nama = trim($_POST["nama_penyewa"] ?? "");
+$wa = trim($_POST["no_whatsapp"] ?? "");
+$ktp = trim($_POST["no_ktp"] ?? "");
+$alamat = trim($_POST["alamat"] ?? "");
+$durasi = filter_input(INPUT_POST, "durasi_hari", FILTER_VALIDATE_INT);
+$catatan = trim($_POST["catatan"] ?? "");
+if (
+    !$motorId ||
+    $nama === "" ||
+    $wa === "" ||
+    $ktp === "" ||
+    $alamat === "" ||
+    !$durasi ||
+    $durasi < 1 ||
+    $durasi > 30 ||
+    empty($_POST["setuju"])
+) {
+    $_SESSION["flash"] = [
+        "type" => "error",
+        "pesan" => "Lengkapi data dan setujui syarat sewa.",
+    ];
+    header("Location: pesan.php?id=" . $motorId);
+    exit();
+}
+try {
+    $pdo->beginTransaction();
+    $lock = $pdo->prepare(
+        "SELECT id FROM motor WHERE id=:id AND status='tersedia' FOR UPDATE",
+    );
+    $lock->execute(["id" => $motorId]);
+    if (!$lock->fetch()) {
+        throw new RuntimeException("Motor sudah dipesan pelanggan lain.");
+    }
+    $stmt = $pdo->prepare(
+        "INSERT INTO penyewaan (motor_id,nama_penyewa,no_whatsapp,no_ktp,alamat,durasi_hari,catatan) VALUES (:motor,:nama,:wa,:ktp,:alamat,:durasi,:catatan)",
+    );
+    $stmt->execute([
+        "motor" => $motorId,
+        "nama" => $nama,
+        "wa" => $wa,
+        "ktp" => $ktp,
+        "alamat" => $alamat,
+        "durasi" => $durasi,
+        "catatan" => $catatan,
+    ]);
+    $pdo->prepare("UPDATE motor SET status='disewa' WHERE id=:id")->execute([
+        "id" => $motorId,
+    ]);
+    $pdo->commit();
+    $_SESSION["flash"] = [
+        "type" => "success",
+        "pesan" =>
+            "Pesanan terkirim. Menunggu konfirmasi admin melalui WhatsApp 12345678910.",
+    ];
+} catch (Throwable $e) {
+    if ($pdo->inTransaction()) {
+        $pdo->rollBack();
+    }
+    $_SESSION["flash"] = ["type" => "error", "pesan" => $e->getMessage()];
+}
+header("Location: list.php");
+exit();

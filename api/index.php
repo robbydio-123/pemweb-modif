@@ -1,13 +1,13 @@
 <?php
 $route = trim($_GET['route'] ?? 'index.php', '/');
 $parts = explode('/', $route);
-$appRoot = dirname(__DIR__) . '/JS 9';
+$appRoot = dirname(__DIR__) . '/JS 10';
 
 if ($route === 'index.php') {
     $script = $appRoot . '/index.php';
 } elseif (
     count($parts) === 2
-    && in_array($parts[0], ['anggota', 'buku', 'penyewaan'], true)
+    && in_array($parts[0], ['auth', 'anggota', 'buku', 'penyewaan'], true)
     && preg_match('/^[a-z0-9_-]+\.php$/D', $parts[1])
 ) {
     $script = $appRoot . '/' . $parts[0] . '/' . $parts[1];

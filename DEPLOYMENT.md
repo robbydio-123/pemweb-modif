@@ -20,10 +20,22 @@ credentials.
 The PHP runtime must have the `pdo_pgsql` extension enabled. On XAMPP, enable
 `extension=pdo_pgsql` in `php.ini` and restart Apache.
 
-Vercel serves JS 9 through the `vercel-php` runtime at `api/index.php`. The
+JS 11's optional Google Sign-In uses Google Identity Services. Create a Web
+OAuth client in Google Cloud Console, add the site's origin to its authorized
+JavaScript origins, and set `GOOGLE_CLIENT_ID` in the PHP environment. For the
+local PHP server, set `$env:GOOGLE_CLIENT_ID="...apps.googleusercontent.com"`
+in the PowerShell window before starting PHP. On an existing database, run
+`JS 11/sql/03_google_login.sql` once; new databases include the Google subject
+column in `JS 11/sql/02_users.sql`. Google sign-in creates customer accounts
+only.
+
+Vercel serves JS 10 through the `vercel-php` runtime at `api/index.php`. The
 dispatcher only routes requests to existing PHP files inside the app's
-`anggota`, `buku`, and `penyewaan` directories. Static assets are served from
-`JS 9/assets`. JS 9 routes are available at `/index.php`, `/buku/...`,
-`/anggota/...`, and `/penyewaan/...`. The site root serves the JS 9 sign-in
-page. The Vercel project Node.js version is set to 22.x as required by the PHP
-runtime.
+`auth`, `anggota`, `buku`, and `penyewaan` directories. Static assets are
+served from `JS 10/assets`. JS 10 routes are available at `/index.php`,
+`/auth/...`, `/buku/...`, `/anggota/...`, and `/penyewaan/...`. The site root
+redirects to the public home page at `/index.php`. Set the Vercel project's
+`DATABASE_URL` to a reachable PostgreSQL database and run
+`JS 10/sql/rental_motor.sql` and `JS 10/sql/02_users.sql` against it before
+using the site. The Vercel project Node.js version is set to 22.x as required
+by the PHP runtime.
