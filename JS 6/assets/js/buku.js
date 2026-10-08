@@ -1,21 +1,52 @@
 const dataBukuLokal = [
-    { plat_nomor: "N 1234 AB", merek: "Honda", model: "Vario 160", tahun: 2024, warna: "Hitam", jenis: "Matic", kapasitas_cc: 160, harga_sewa_per_hari: 85000, status: "Tersedia" },
-    { plat_nomor: "N 2345 CD", merek: "Yamaha", model: "NMAX", tahun: 2023, warna: "Biru", jenis: "Matic", kapasitas_cc: 155, harga_sewa_per_hari: 120000, status: "Tersedia" },
-    { plat_nomor: "N 3456 EF", merek: "Honda", model: "Beat Street", tahun: 2022, warna: "Merah", jenis: "Matic", kapasitas_cc: 110, harga_sewa_per_hari: 70000, status: "Disewa" }
+  {
+    plat_nomor: "N 1234 AB",
+    merek: "Honda",
+    model: "Vario 160",
+    tahun: 2024,
+    warna: "Hitam",
+    jenis: "Matic",
+    kapasitas_cc: 160,
+    harga_sewa_per_hari: 85000,
+    status: "Tersedia",
+  },
+  {
+    plat_nomor: "N 2345 CD",
+    merek: "Yamaha",
+    model: "NMAX",
+    tahun: 2023,
+    warna: "Biru",
+    jenis: "Matic",
+    kapasitas_cc: 155,
+    harga_sewa_per_hari: 120000,
+    status: "Tersedia",
+  },
+  {
+    plat_nomor: "N 3456 EF",
+    merek: "Honda",
+    model: "Beat Street",
+    tahun: 2022,
+    warna: "Merah",
+    jenis: "Matic",
+    kapasitas_cc: 110,
+    harga_sewa_per_hari: 70000,
+    status: "Disewa",
+  },
 ];
 
 function tampilkanBuku(tbody, dataBuku) {
-    tbody.innerHTML = "";
+  tbody.innerHTML = "";
 
-    dataBuku.forEach(function (buku) {
-        const row = document.createElement("tr");
-        const motor = `${buku.merek} ${buku.model}`;
-        const linkPesan = `../penyewaan/tambah.html?plat_nomor=${encodeURIComponent(buku.plat_nomor)}&motor=${encodeURIComponent(motor)}&harga=${encodeURIComponent(buku.harga_sewa_per_hari)}`;
-        const aksi = buku.status === "Tersedia"
-            ? `<a class="btn-pesan" href="${linkPesan}"><i class="bi bi-calendar-check"></i> Pesan</a>`
-            : `<span class="aksi-nonaktif">Tidak tersedia</span>`;
+  dataBuku.forEach(function (buku) {
+    const row = document.createElement("tr");
+    const motor = `${buku.merek} ${buku.model}`;
+    const linkPesan = `../penyewaan/tambah.html?plat_nomor=${encodeURIComponent(buku.plat_nomor)}&motor=${encodeURIComponent(motor)}&harga=${encodeURIComponent(buku.harga_sewa_per_hari)}`;
+    const aksi =
+      buku.status === "Tersedia"
+        ? `<a class="btn-pesan" href="${linkPesan}"><i class="bi bi-calendar-check"></i> Pesan</a>`
+        : `<span class="aksi-nonaktif">Tidak tersedia</span>`;
 
-        row.innerHTML = `
+    row.innerHTML = `
             <td>${buku.plat_nomor}</td>
             <td>${motor}</td>
             <td>${buku.tahun}</td>
@@ -25,34 +56,34 @@ function tampilkanBuku(tbody, dataBuku) {
             <td>${aksi}</td>
         `;
 
-        tbody.appendChild(row);
-    });
+    tbody.appendChild(row);
+  });
 }
 
 async function muatDaftarBuku() {
-    const tbody = document.querySelector("#tabel-buku");
+  const tbody = document.querySelector("#tabel-buku");
 
-    if (!tbody) return;
+  if (!tbody) return;
 
-    tbody.innerHTML = `
+  tbody.innerHTML = `
         <tr>
             <td colspan="7">Memuat data...</td>
         </tr>
     `;
 
-    try {
-        const response = await fetch("../data/buku.json");
+  try {
+    const response = await fetch("../data/buku.json");
 
-        if (!response.ok) {
-            throw new Error("Gagal mengambil data motor.");
-        }
-
-        const dataBuku = await response.json();
-        tampilkanBuku(tbody, dataBuku);
-    } catch (error) {
-        console.warn("JSON motor tidak dapat dimuat, memakai data lokal.", error);
-        tampilkanBuku(tbody, dataBukuLokal);
+    if (!response.ok) {
+      throw new Error("Gagal mengambil data motor.");
     }
+
+    const dataBuku = await response.json();
+    tampilkanBuku(tbody, dataBuku);
+  } catch (error) {
+    console.warn("JSON motor tidak dapat dimuat, memakai data lokal.", error);
+    tampilkanBuku(tbody, dataBukuLokal);
+  }
 }
 
 document.addEventListener("DOMContentLoaded", muatDaftarBuku);

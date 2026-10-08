@@ -5,29 +5,29 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
 
 function require_admin(): void
 {
-    if (($_SESSION['role'] ?? '') !== 'admin') {
-        header('Location: ../index.php');
-        exit;
+    if (($_SESSION["role"] ?? "") !== "admin") {
+        header("Location: ../index.php");
+        exit();
     }
 }
 
 function require_login(): void
 {
-    if (empty($_SESSION['role'])) {
-        header('Location: ../index.php');
-        exit;
+    if (empty($_SESSION["role"])) {
+        header("Location: ../index.php");
+        exit();
     }
 }
 
 function is_customer(): bool
 {
-    return ($_SESSION['role'] ?? '') === 'customer';
+    return ($_SESSION["role"] ?? "") === "customer";
 }
 
 function require_customer(): void
 {
     if (!is_customer()) {
-        header('Location: ../index.php');
-        exit;
+        header("Location: ../index.php");
+        exit();
     }
 }

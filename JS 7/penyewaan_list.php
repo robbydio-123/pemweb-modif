@@ -1,3 +1,44 @@
 <?php
-session_start(); require __DIR__ . '/includes/auth.php'; require_admin(); $pesanan=$_SESSION['penyewaan']??[];
-?><!doctype html><html lang="id"><head><meta charset="utf-8"><title>Pesanan Penyewaan</title><link rel="stylesheet" href="assets/css/style.css"></head><body><main><section><h2>Pesanan Penyewaan</h2><p>Konfirmasi pelanggan melalui WhatsApp admin: <strong>0812-3456-7890</strong>.</p><?php foreach($pesanan as $i=>$p): ?><article><strong><?php echo htmlspecialchars($p['motor']); ?></strong> - <?php echo htmlspecialchars($p['nama_penyewa']); ?><br>WA: <?php echo htmlspecialchars($p['no_whatsapp']); ?> | KTP: <?php echo htmlspecialchars($p['no_ktp']); ?> | Durasi: <?php echo $p['durasi_hari']; ?> hari<br>Status: <?php echo htmlspecialchars($p['status']); ?><?php if($p['status']==='menunggu'): ?><form method="post" action="penyewaan_proses.php"><input type="hidden" name="index" value="<?php echo $i; ?>"><button name="aksi" value="dikonfirmasi">Konfirmasi</button><button name="aksi" value="ditolak">Tolak</button></form><?php endif; ?></article><?php endforeach; ?></section></main></body></html>
+session_start();
+require __DIR__ . "/includes/auth.php";
+require_admin();
+$pesanan = $_SESSION["penyewaan"] ?? [];
+?>
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8">
+    <title>Pesanan Penyewaan</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+    <main>
+        <section>
+            <h2>Pesanan Penyewaan</h2>
+            <p>Konfirmasi pelanggan melalui WhatsApp admin: <strong>0812-3456-7890</strong>.</p><?php foreach (
+    $pesanan
+    as $i => $p
+): ?><article><strong><?php echo htmlspecialchars(
+    $p["motor"],
+); ?></strong> - <?php echo htmlspecialchars(
+    $p["nama_penyewa"],
+); ?><br>WA: <?php echo htmlspecialchars(
+    $p["no_whatsapp"],
+); ?> | KTP: <?php echo htmlspecialchars(
+     $p["no_ktp"],
+ ); ?> | Durasi: <?php echo $p["durasi_hari"]; ?> hari<br>Status: <?php
+ echo htmlspecialchars($p["status"]);
+ if (
+     $p["status"] === "menunggu"
+ ): ?><form method="post" action="penyewaan_proses.php"><input type="hidden" name="index"
+                        value="<?php echo $i; ?>"><button name="aksi"
+                        value="dikonfirmasi">Konfirmasi</button><button name="aksi"
+                        value="ditolak">Tolak</button></form><?php endif;
+ ?></article><?php endforeach; ?>
+        </section>
+    </main>
+</body>
+
+</html>

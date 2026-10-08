@@ -1,7 +1,50 @@
 <?php
-session_start(); require __DIR__ . '/../includes/auth.php'; require_admin(); require __DIR__ . '/../includes/koneksi.php';
-$editId = filter_input(INPUT_GET, 'edit', FILTER_VALIDATE_INT); $pelanggan = [];
-if ($editId) { $stmt = $pdo->prepare('SELECT * FROM pelanggan WHERE id = :id'); $stmt->execute(['id' => $editId]); $pelanggan = $stmt->fetch(PDO::FETCH_ASSOC) ?: []; }
-$isEdit = !empty($pelanggan); $page_title = $isEdit ? 'Edit Pelanggan' : 'Tambah Pelanggan'; require __DIR__ . '/../includes/header.php';
-?><section><h2><?php echo $page_title; ?></h2><?php if (!empty($_SESSION['flash'])): $flash = $_SESSION['flash']; unset($_SESSION['flash']); ?><p class="flash flash-<?php echo htmlspecialchars($flash['type']); ?>"><?php echo htmlspecialchars($flash['pesan']); ?></p><?php endif; ?>
-<form method="post" action="<?php echo $isEdit ? 'proses_ubah.php' : 'proses_tambah.php'; ?>"><?php if ($isEdit): ?><input type="hidden" name="id" value="<?php echo (int) $pelanggan['id']; ?>"><?php endif; ?><p><label for="nama">Nama Pelanggan</label><br><input type="text" id="nama" name="nama" value="<?php echo htmlspecialchars($pelanggan['nama'] ?? ''); ?>" required></p><p><label for="no_pelanggan">No. Pelanggan</label><br><input type="text" id="no_pelanggan" name="no_pelanggan" value="<?php echo htmlspecialchars($pelanggan['no_pelanggan'] ?? ''); ?>" required></p><p><label for="alamat">Alamat</label><br><input type="text" id="alamat" name="alamat" value="<?php echo htmlspecialchars($pelanggan['alamat'] ?? ''); ?>"></p><p><label for="no_hp">No. HP</label><br><input type="text" id="no_hp" name="no_hp" value="<?php echo htmlspecialchars($pelanggan['no_hp'] ?? ''); ?>" required></p><p><button type="submit">Simpan</button></p></form></section><?php require __DIR__ . '/../includes/footer.php'; ?>
+session_start();
+require __DIR__ . "/../includes/auth.php";
+require_admin();
+require __DIR__ . "/../includes/koneksi.php";
+$editId = filter_input(INPUT_GET, "edit", FILTER_VALIDATE_INT);
+$pelanggan = [];
+if ($editId) {
+    $stmt = $pdo->prepare("SELECT * FROM pelanggan WHERE id = :id");
+    $stmt->execute(["id" => $editId]);
+    $pelanggan = $stmt->fetch(PDO::FETCH_ASSOC) ?: [];
+}
+$isEdit = !empty($pelanggan);
+$page_title = $isEdit ? "Edit Pelanggan" : "Tambah Pelanggan";
+require __DIR__ . "/../includes/header.php";
+?><section>
+    <h2><?php echo $page_title; ?></h2><?php if (
+    !empty($_SESSION["flash"])
+):
+
+    $flash = $_SESSION["flash"];
+    unset($_SESSION["flash"]);
+    ?><p class="flash flash-<?php echo htmlspecialchars(
+    $flash["type"],
+); ?>"><?php echo htmlspecialchars($flash["pesan"]); ?></p><?php
+endif; ?>
+    <form method="post" action="<?php echo $isEdit
+    ? "proses_ubah.php"
+    : "proses_tambah.php"; ?>"><?php if (
+    $isEdit
+): ?><input type="hidden" name="id" value="<?php echo (int) $pelanggan[
+    "id"
+]; ?>"><?php endif; ?><p><label for="nama">Nama Pelanggan</label><br><input type="text" id="nama"
+                name="nama" value="<?php echo htmlspecialchars(
+    $pelanggan["nama"] ?? "",
+); ?>" required></p>
+        <p><label for="no_pelanggan">No. Pelanggan</label><br><input type="text" id="no_pelanggan"
+                name="no_pelanggan" value="<?php echo htmlspecialchars(
+    $pelanggan["no_pelanggan"] ?? "",
+); ?>" required></p>
+        <p><label for="alamat">Alamat</label><br><input type="text" id="alamat" name="alamat" value="<?php echo htmlspecialchars(
+    $pelanggan["alamat"] ?? "",
+); ?>"></p>
+        <p><label for="no_hp">No. HP</label><br><input type="text" id="no_hp" name="no_hp" value="<?php echo htmlspecialchars(
+    $pelanggan["no_hp"] ?? "",
+); ?>" required></p>
+        <p><button type="submit">Simpan</button></p>
+    </form>
+</section><?php require __DIR__ .
+    "/../includes/footer.php"; ?>

@@ -1,1 +1,2 @@
-<?php header('Location: list.php'); exit;
+<?php header("Location: list.php");
+exit();

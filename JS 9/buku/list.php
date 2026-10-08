@@ -1,4 +1,89 @@
 <?php
-session_start(); require __DIR__ . '/../includes/auth.php'; require_login(); require __DIR__ . '/../includes/koneksi.php';
-$page_title='Daftar Motor'; $customer=is_customer(); $flash=$_SESSION['flash']??null; unset($_SESSION['flash']); $daftarMotor=$pdo->query('SELECT * FROM motor ORDER BY id DESC')->fetchAll(PDO::FETCH_ASSOC); require __DIR__ . '/../includes/header.php';
-?><section><h2>Daftar Motor</h2><p class="page-description"><?php echo $customer?'Katalog motor yang tersedia untuk pelanggan.':'Kelola armada motor yang tersedia untuk disewakan.'; ?></p><?php if($flash): ?><p class="flash flash-<?php echo htmlspecialchars($flash['type']??'success'); ?>"><?php echo htmlspecialchars($flash['pesan']??$flash); ?></p><?php endif; ?><?php if(!$customer): ?><p><a class="button" href="tambah.php">Tambah Motor</a> | <a href="../penyewaan/list.php">Lihat Pesanan</a></p><?php endif; ?><div class="table-responsive"><table><thead><tr><th>Motor</th><th>Merk</th><th>Tahun</th><th>Plat Nomor</th><th>Tarif/Hari</th><th>Status</th><th>Aksi</th></tr></thead><tbody><?php foreach($daftarMotor as $motor): ?><tr><td><?php echo htmlspecialchars($motor['nama_motor']); ?></td><td><?php echo htmlspecialchars($motor['merk']); ?></td><td><?php echo (int)$motor['tahun']; ?></td><td><?php echo htmlspecialchars($motor['plat_nomor']); ?></td><td>Rp <?php echo number_format((float)$motor['tarif_harian'],0,',','.'); ?></td><td><?php echo htmlspecialchars(ucfirst($motor['status'])); ?></td><td><?php if($customer&&$motor['status']==='tersedia'): ?><a class="action-edit" href="pesan.php?id=<?php echo (int)$motor['id']; ?>">Pesan</a><?php elseif($customer): ?>Tidak tersedia<?php else: ?><a class="action-edit" href="edit.php?id=<?php echo (int)$motor['id']; ?>">Edit</a><form method="post" action="proses_hapus.php" style="display:inline"><input type="hidden" name="id" value="<?php echo (int)$motor['id']; ?>"><button type="submit" class="btn-hapus">Hapus</button></form><?php endif; ?></td></tr><?php endforeach; ?><?php if(!$daftarMotor): ?><tr><td colspan="7">Belum ada data motor.</td></tr><?php endif; ?></tbody></table></div></section><?php require __DIR__ . '/../includes/footer.php'; ?>
+session_start();
+require __DIR__ . "/../includes/auth.php";
+require_login();
+require __DIR__ . "/../includes/koneksi.php";
+$page_title = "Daftar Motor";
+$customer = is_customer();
+$flash = $_SESSION["flash"] ?? null;
+unset($_SESSION["flash"]);
+$daftarMotor = $pdo
+    ->query("SELECT * FROM motor ORDER BY id DESC")
+    ->fetchAll(PDO::FETCH_ASSOC);
+require __DIR__ . "/../includes/header.php";
+?><section>
+    <h2>Daftar Motor</h2>
+    <p class="page-description"><?php echo $customer
+    ? "Katalog motor yang tersedia untuk pelanggan."
+    : "Kelola armada motor yang tersedia untuk disewakan."; ?></p><?php
+if ($flash): ?><p class="flash flash-<?php echo htmlspecialchars(
+    $flash["type"] ?? "success",
+); ?>"><?php echo htmlspecialchars(
+    $flash["pesan"] ?? $flash,
+); ?></p><?php endif;
+if (
+    !$customer
+): ?><p><a class="button" href="tambah.php">Tambah Motor</a> | <a
+            href="../penyewaan/list.php">Lihat Pesanan</a></p><?php endif;
+?><div class="table-responsive">
+        <table>
+            <thead>
+                <tr>
+                    <th>Motor</th>
+                    <th>Merk</th>
+                    <th>Tahun</th>
+                    <th>Plat Nomor</th>
+                    <th>Tarif/Hari</th>
+                    <th>Status</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody><?php
+foreach ($daftarMotor as $motor): ?><tr>
+                    <td><?php echo htmlspecialchars(
+    $motor["nama_motor"],
+); ?></td>
+                    <td><?php echo htmlspecialchars(
+    $motor["merk"],
+); ?></td>
+                    <td><?php echo (int) $motor[
+    "tahun"
+]; ?></td>
+                    <td><?php echo htmlspecialchars(
+    $motor["plat_nomor"],
+); ?></td>
+                    <td>Rp <?php echo number_format(
+    (float) $motor["tarif_harian"],
+    0,
+    ",",
+    ".",
+); ?></td>
+                    <td><?php echo htmlspecialchars(
+    ucfirst($motor["status"]),
+); ?></td>
+                    <td><?php if (
+    $customer &&
+    $motor["status"] === "tersedia"
+): ?><a class="action-edit" href="pesan.php?id=<?php echo (int) $motor[
+    "id"
+]; ?>">Pesan</a><?php elseif (
+    $customer
+): ?>Tidak tersedia<?php else: ?><a class="action-edit" href="edit.php?id=<?php echo (int) $motor[
+    "id"
+]; ?>">Edit</a>
+                        <form method="post" action="proses_hapus.php" style="display:inline"><input
+                                type="hidden" name="id" value="<?php echo (int) $motor[
+    "id"
+]; ?>"><button type="submit" class="btn-hapus">Hapus</button></form><?php endif; ?>
+                    </td>
+                </tr><?php endforeach;
+if (
+    !$daftarMotor
+): ?><tr>
+                    <td colspan="7">Belum ada data motor.</td>
+                </tr><?php endif;
+?></tbody>
+        </table>
+    </div>
+</section><?php require __DIR__ .
+    "/../includes/footer.php"; ?>

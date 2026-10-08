@@ -1,12 +1,14 @@
     </main>
 
     <footer>
-        <p>&copy; <?php echo date('Y'); ?> Rental Motor</p>
+        <p>&copy; <?php echo date("Y"); ?> Rental Motor</p>
     </footer>
     <script src="<?php echo $base; ?>assets/js/app.js"></script>
-    <?php if (!empty($extra_scripts)): foreach ($extra_scripts as $src): ?>
+    <?php if (!empty($extra_scripts)):
+        foreach ($extra_scripts as $src): ?>
     <script src="<?php echo $src; ?>"></script>
     <?php endforeach;
     endif; ?>
-</body>
-</html>
+    </body>
+
+    </html>

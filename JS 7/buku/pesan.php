@@ -1,3 +1,58 @@
 <?php
-session_start(); require __DIR__ . '/../includes/auth.php'; require_customer(); $i=filter_input(INPUT_GET,'index',FILTER_VALIDATE_INT); if($i===false||!isset($_SESSION['motor'][$i])||$_SESSION['motor'][$i]['status']!=='tersedia'){$_SESSION['flash']='Motor tidak tersedia.';header('Location: list.php');exit;} $m=$_SESSION['motor'][$i];
-?><!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Pesan Motor</title><link rel="stylesheet" href="../assets/css/style.css"></head><body><main><section><h2>Form Pesan Motor</h2><p><?php echo htmlspecialchars($m['nama_motor']); ?> - Rp <?php echo number_format($m['tarif_harian'],0,',','.'); ?>/hari</p><p>WhatsApp admin/petugas: <strong>0812-3456-7890</strong></p><form method="post" action="proses_pesan.php"><input type="hidden" name="index" value="<?php echo $i; ?>"><p><label>Nama Penyewa</label><input name="nama_penyewa" required></p><p><label>Nomor WhatsApp</label><input name="no_whatsapp" required></p><p><label>Nomor KTP</label><input name="no_ktp" required></p><p><label>Alamat</label><input name="alamat" required></p><p><label>Durasi Sewa (hari)</label><input type="number" name="durasi_hari" min="1" max="30" required></p><p><label>Catatan</label><textarea name="catatan" rows="3"></textarea></p><p><label class="remember"><input type="checkbox" name="setuju" value="1" required> Saya menyetujui syarat sewa: membawa KTP asli, membayar sesuai tarif, menjaga motor, dan bertanggung jawab atas keterlambatan atau kerusakan.</label></p><button type="submit">Kirim Pesanan</button></form></section></main></body></html>
+session_start();
+require __DIR__ . "/../includes/auth.php";
+require_customer();
+$i = filter_input(INPUT_GET, "index", FILTER_VALIDATE_INT);
+if (
+    $i === false ||
+    !isset($_SESSION["motor"][$i]) ||
+    $_SESSION["motor"][$i]["status"] !== "tersedia"
+) {
+    $_SESSION["flash"] = "Motor tidak tersedia.";
+    header("Location: list.php");
+    exit();
+}
+$m = $_SESSION["motor"][$i];
+?>
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Pesan Motor</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body>
+    <main>
+        <section>
+            <h2>Form Pesan Motor</h2>
+            <p><?php echo htmlspecialchars(
+    $m["nama_motor"],
+); ?> - Rp <?php echo number_format(
+     $m["tarif_harian"],
+     0,
+     ",",
+     ".",
+ ); ?>/hari</p>
+            <p>WhatsApp admin/petugas: <strong>0812-3456-7890</strong></p>
+            <form method="post" action="proses_pesan.php"><input type="hidden" name="index"
+                    value="<?php echo $i; ?>">
+                <p><label>Nama Penyewa</label><input name="nama_penyewa" required></p>
+                <p><label>Nomor WhatsApp</label><input name="no_whatsapp" required></p>
+                <p><label>Nomor KTP</label><input name="no_ktp" required></p>
+                <p><label>Alamat</label><input name="alamat" required></p>
+                <p><label>Durasi Sewa (hari)</label><input type="number" name="durasi_hari" min="1"
+                        max="30" required></p>
+                <p><label>Catatan</label><textarea name="catatan" rows="3"></textarea></p>
+                <p><label class="remember"><input type="checkbox" name="setuju" value="1" required>
+                        Saya menyetujui syarat sewa: membawa KTP asli, membayar sesuai tarif,
+                        menjaga motor, dan bertanggung jawab atas keterlambatan atau
+                        kerusakan.</label></p><button type="submit">Kirim Pesanan</button>
+            </form>
+        </section>
+    </main>
+</body>
+
+</html>
