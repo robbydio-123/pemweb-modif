@@ -1,3 +1,4 @@
+// Data cadangan dipakai bila berkas JSON tidak berhasil dibaca.
 const dataAnggotaCadangan = [
   {
     no_pelanggan: "P001",
@@ -30,11 +31,14 @@ const dataAnggotaCadangan = [
 ];
 
 function tampilkanAnggota(tbody, dataAnggota) {
+  // Mengosongkan isi tabel agar data tidak terduplikasi.
   tbody.innerHTML = "";
 
+  // Mengubah setiap objek pelanggan menjadi satu baris tabel.
   dataAnggota.forEach(function (anggota) {
     const row = document.createElement("tr");
 
+    // Menyusun kolom pelanggan dan tombol aksi ke dalam baris.
     row.innerHTML = `
             <td>${anggota.no_pelanggan}</td>
             <td>${anggota.nama}</td>
@@ -47,14 +51,18 @@ function tampilkanAnggota(tbody, dataAnggota) {
             </td>
         `;
 
+    // Menambahkan baris yang sudah dibuat ke tabel.
     tbody.appendChild(row);
   });
 }
 
+// Mengambil data pelanggan dari JSON lalu menampilkannya.
 async function muatDaftarAnggota() {
   const tbody = document.querySelector("#tabel-anggota");
+  // Halaman lain mungkin tidak memiliki tabel pelanggan.
   if (!tbody) return;
 
+  // Memberi tahu pengguna bahwa data sedang dimuat.
   tbody.innerHTML = `
         <tr>
             <td colspan="6">Memuat data...</td>
@@ -62,15 +70,19 @@ async function muatDaftarAnggota() {
     `;
 
   try {
+    // Meminta data melalui HTTP; fetch memerlukan server lokal seperti Laragon.
     const response = await fetch("../data/anggota.json");
 
+    // Ubah respons gagal menjadi error agar ditangani oleh catch.
     if (!response.ok) {
       throw new Error("Gagal mengambil data pelanggan.");
     }
 
+    // Mengubah isi JSON menjadi array JavaScript.
     const dataAnggota = await response.json();
     tampilkanAnggota(tbody, dataAnggota);
   } catch (error) {
+    // Jika permintaan gagal, tampilkan data cadangan dan catat penyebabnya.
     console.warn(
       "JSON pelanggan tidak dapat dimuat, memakai data cadangan.",
       error,
@@ -78,4 +90,5 @@ async function muatDaftarAnggota() {
     tampilkanAnggota(tbody, dataAnggotaCadangan);
   }
 }
+// Memulai pemuatan setelah struktur halaman selesai dibaca browser.
 document.addEventListener("DOMContentLoaded", muatDaftarAnggota);

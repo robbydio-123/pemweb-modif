@@ -9,6 +9,12 @@ $__jobsheetRoot = dirname(__DIR__);
 $__scriptDir = dirname($_SERVER['SCRIPT_FILENAME']);
 $__rel = ltrim(str_replace('\\', '/', substr($__scriptDir, strlen($__jobsheetRoot))), '/');
 $base = $__rel === '' ? '' : str_repeat('../', substr_count($__rel, '/') + 1);
+$__requestPath = rawurldecode((string) parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH));
+if (strncmp($__requestPath, '/JS 10/', 7) === 0) {
+    $__appPath = substr($__requestPath, 7);
+    $__appDir = trim(dirname('/' . $__appPath), '/');
+    $base = $__appDir === '' ? '' : str_repeat('../', substr_count($__appDir, '/') + 1);
+}
 ?>
 <!DOCTYPE html>
 <html lang="id">

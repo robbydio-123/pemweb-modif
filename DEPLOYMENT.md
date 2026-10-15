@@ -20,6 +20,13 @@ credentials.
 The PHP runtime must have the `pdo_pgsql` extension enabled. On XAMPP, enable
 `extension=pdo_pgsql` in `php.ini` and restart Apache.
 
+For trusted local HTTPS on Windows, run the VS Code task
+**Run Rental Motor over HTTPS** and open `https://localhost:8080/index.php`. The task
+creates and trusts a localhost certificate for the current Windows user, then
+starts the PHP server if it is not already running. Keep the task active while
+using the site. This certificate is only for local development; Vercel provides
+HTTPS for the deployed site.
+
 JS 11's optional Google Sign-In uses Google Identity Services. Create a Web
 OAuth client in Google Cloud Console, add the site's origin to its authorized
 JavaScript origins, and set `GOOGLE_CLIENT_ID` in the PHP environment. For the

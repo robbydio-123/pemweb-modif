@@ -1,0 +1,87 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Run Jobsheet 10 PHP server",
+            "type": "process",
+            "command": "C:\\xampp\\php\\php.exe",
+            "args": [
+                "-d",
+                "extension=php_pdo_pgsql.dll",
+                "-S",
+                "127.0.0.1:8000",
+                "-t",
+                "${workspaceFolder}\\JS 10"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Run Jobsheet 6 PHP server",
+            "type": "process",
+            "command": "C:\\xampp\\php\\php.exe",
+            "args": [
+                "-S",
+                "127.0.0.1:8001",
+                "-t",
+                "${workspaceFolder}\\JS 6"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Run Rental Motor over HTTPS",
+            "type": "process",
+            "command": "powershell.exe",
+            "args": [
+                "-NoProfile",
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                "${workspaceFolder}\\scripts\\start-local-https.ps1"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Run Jobsheet 6 over HTTPS",
+            "type": "process",
+            "command": "powershell.exe",
+            "args": [
+                "-NoProfile",
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                "${workspaceFolder}\\scripts\\start-local-https.ps1",
+                "-DocumentRoot",
+                "JS 6",
+                "-PhpPort",
+                "8001",
+                "-HttpsPort",
+                "8443",
+                "-StartPath",
+                "/dashboard.html"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "isBackground": true,
+            "problemMatcher": {
+                "pattern": {
+                    "regexp": "^(.*)$"
+                },
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": "Starting Rental Motor HTTPS proxy",
+                    "endsPattern": "Rental Motor HTTPS: https://localhost:8443/dashboard.html"
+                }
+            }
+        }
+    ]
+}
