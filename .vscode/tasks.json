@@ -4,7 +4,7 @@
         {
             "label": "Run Jobsheet 10 PHP server",
             "type": "process",
-            "command": "C:\\xampp\\php\\php.exe",
+            "command": "C:\\laragon\\bin\\php\\php-8.3.33-Win32-vs16-x64\\php.exe",
             "args": [
                 "-d",
                 "extension=php_pdo_pgsql.dll",
@@ -21,7 +21,7 @@
         {
             "label": "Run Jobsheet 6 PHP server",
             "type": "process",
-            "command": "C:\\xampp\\php\\php.exe",
+            "command": "C:\\laragon\\bin\\php\\php-8.3.33-Win32-vs16-x64\\php.exe",
             "args": [
                 "-S",
                 "127.0.0.1:8001",
